@@ -137,7 +137,21 @@ export default function Home() {
 
   console.log("firstDataForEachDate", firstDataForEachDate);
 
-  if (isPending) return 'Loading...'
+  if (isPending)
+    return (
+      <div className="text-center h-screen flex justify-center w-full bg-[#355D8E]">
+       <div className="loader"></div>
+
+      </div>
+
+    );
+  if (error)
+    return (
+      <div className="flex items-center min-h-screen justify-center">
+        {/* @ts-ignore */}
+        <p className="text-red-400">{error.message}</p>
+      </div>
+    );
 
   return (
     <main className="min-h-screen  bg-gradient-to-r from-[#355D8E] to-[#355D8E] md:pb-0 pb-10 md:pt-0 pt- ">
@@ -239,16 +253,16 @@ export default function Home() {
                             iconName={item?.weather[0].icon ?? "123"} />
                         </li>
                         <li className="flex flexcol items-center text-xs  justify-end gap-3 -mt-4">
-                        <div className="">
-                          <p>min</p>
-                          <p>{convertKelvinToCelsius(item?.main.temp_min ?? 0)}°C</p>
-                        </div>
+                          <div className="">
+                            <p>min</p>
+                            <p>{convertKelvinToCelsius(item?.main.temp_min ?? 0)}°C</p>
+                          </div>
 
-                        <div className="">
-                          <p>max</p>
-                          <p>{convertKelvinToCelsius(item?.main.temp_max ?? 0)}°C</p>
-                        </div>
-                      </li>
+                          <div className="">
+                            <p>max</p>
+                            <p>{convertKelvinToCelsius(item?.main.temp_max ?? 0)}°C</p>
+                          </div>
+                        </li>
 
                       </div>
                       <li className="text-sm font-semibold">{convertKelvinToCelsius(item?.main.temp ?? 0)}°C</li>
@@ -306,7 +320,7 @@ export default function Home() {
           {/* First section */}
           <div>
             <section className=" p-7">
-              <p className="text-white xl:text-4xl md:text-2xl font-bold tracking-wider">{city_name}</p>
+              <p className="text-white text-4xl md:text-2xl font-bold tracking-wider">{city_name}</p>
               <div>
                 <p className="text-8xl whitespace-nowrap text-[#ffffff] pt-5 t">{convertKelvinToCelsius(firstData?.main.temp ?? 0)}°C</p>
                 <p className="xl:text-xl md:text-lg text-white ">{firstData?.weather[0]?.description}</p>
