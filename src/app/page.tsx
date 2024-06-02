@@ -137,14 +137,15 @@ export default function Home() {
 
   console.log("firstDataForEachDate", firstDataForEachDate);
 
+  //loading screen
   if (isPending)
     return (
       <div className="text-center h-screen flex justify-center w-full bg-[#355D8E]">
        <div className="loader"></div>
 
       </div>
-
     );
+    //if any error in api, this error shows
   if (error)
     return (
       <div className="flex items-center min-h-screen justify-center">
@@ -168,7 +169,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Second section */}
+          {/* Second section / weather details */}
           <section className="flex p-7 rounded-[30px] bg-[#8D93A6]/30 slg:w-[65%] w-full inset-20 shadow-[rgba(0,0,15,0.5)_10px_5px_4px_0px]">
             <div className="flex md:flex-row flex-col justify-between text-white pl-3 w-full">
               <div className="flex justify-between flex-col">
@@ -181,11 +182,9 @@ export default function Home() {
                     <FiSunrise size={27} />
                     <div className="">
                       <p className="text-base">Sunrise</p>
-                      {/* <p className="text-xs">{format(parseISO(firstData?.city.sunrise ?? ''), 'hh:mm a')}</p> */}
                       <p className="text-xs">{sunriseTime ? format(sunriseTime, 'hh:mm a') : 'N/A'}</p>
                     </div>
                   </div>
-
                   <div className="flex gap-2 items-end">
                     <FiSunset size={27} />
                     <div className="">
@@ -197,7 +196,6 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col justify-between">
-                {/* <IoIosSunny className="xl:text-[170px] text-[150px] text text-yellow-400" /> */}
                 <Weathericons
                   width={100} height={100}
                   iconName={getDayOrNightIcon(firstData?.weather[0]?.icon ?? '', firstData?.dt_txt ?? '')}
@@ -205,7 +203,6 @@ export default function Home() {
                 <p className="text-center text-2xl font-semibold capitalize">{firstData?.weather[0]?.description}</p>
               </div>
 
-              {/* third */}
               <div className="flex gap-7 ">
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col items-center">
@@ -225,18 +222,14 @@ export default function Home() {
                     <p>{firstData?.weather[0]?.description}</p>
                     <p className="text-sm pt-2">Cloud</p>
                   </div>
-                  {/* <div className="flex flex-col items-center">
-                    <SlSpeedometer className="xl:text-4xl text-3xl" />
-                    <p>8</p>
-                    <p className="text-sm pt-2">UV</p>
-                  </div> */}
                 </div>
               </div>
             </div>
           </section>
         </div>
 
-        {/* second Section */}
+        {/* third Section / 5 Days Forecast:
+ */}
         <div className="flex lg:flex-row flex-col gap-10 pt-5 ">
           <section className="flex flex-col items-center justify-between pt-4 pb-2 px-4 rounded-[30px] bg-[#8D93A6]/30 lg:w-[30%] inset-20 shadow-[rgba(0,0,15,0.5)_10px_5px_4px_0px]">
             <h1 className="xl:text-3xl lg:text-2xl font-semibold text-white whitespace-nowrap">5 Days Forecast:</h1>
@@ -266,18 +259,6 @@ export default function Home() {
 
                       </div>
                       <li className="text-sm font-semibold">{convertKelvinToCelsius(item?.main.temp ?? 0)}°C</li>
-
-                      {/* <li className="flex flexcol items-center  justify-end gap-3">
-                        <div className="">
-                          <p>min</p>
-                          <p>{convertKelvinToCelsius(item?.main.temp_min ?? 0)}°C</p>
-                        </div>
-
-                        <div className="">
-                          <p>max</p>
-                          <p>{convertKelvinToCelsius(item?.main.temp_max ?? 0)}°C</p>
-                        </div>
-                      </li> */}
                       <li className="text-sm font-semibold">{format(parseISO(item?.dt_txt ?? ''), 'EEEE, d MMM')}</li>
                     </ul>
                   ))
@@ -286,7 +267,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* hourly forecast */}
+          {/* Fourth section/hourly forecast */}
           <section className="flex flex-col items-center  pt-4 px-7 rounded-[30px] bg-[#8D93A6]/30 lg:w-[70%] w-full inset-20 shadow-[rgba(0,0,15,0.5)_10px_5px_4px_0px]">
             <h1 className="text-3xl text-white font-semibold text-center">Hourly Forecast:</h1>
             <div className="text-white w-full  h-full pb-2">
@@ -301,7 +282,6 @@ export default function Home() {
                           iconName={getDayOrNightIcon(item.weather[0].icon, item.dt_txt)} />
                       </p>
                       <p>{convertKelvinToCelsius(item?.main.temp ?? 0)}°C</p>
-                      {/* <p className="text-3xl text-yellow-400"><IoIosSunny /></p> */}
                       <p className="whitespace-nowrap text-sm font-semibold pt-3">{item?.wind?.speed} km/h</p>
                     </li>
                   ))
@@ -313,7 +293,6 @@ export default function Home() {
       </div>
 
 
-      {/*  */}
       {/* mobile responsive */}
       <div className="md:hidden mx-3 pt-20">
         <div className="fle gap-10 ">
@@ -369,7 +348,6 @@ export default function Home() {
                           iconName={getDayOrNightIcon(item.weather[0].icon, item.dt_txt)} />
                       </p>
                       <p>{convertKelvinToCelsius(item?.main.temp ?? 0)}°C</p>
-                      {/* <p className="text-3xl text-yellow-400"><IoIosSunny /></p> */}
                       <p className="whitespace-nowrap text-sm font-semibold pt-3">{item?.wind?.speed} km/h</p>
                     </li>
                   ))
@@ -421,7 +399,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
             <div className="flex gap-3 pt-3">
               <div className="rounded-2xl bg-white p-3 h-44 w-full">
                 <div className="text-[#1E1E5A]">
@@ -459,15 +436,8 @@ export default function Home() {
               </div>
             </div>
           </section>
-
         </div>
       </div>
     </main>
   );
 }
-
-
-// Skeleton component
-const Skeleton = ({ className }: any) => (
-  <div className={`animate-pulse bg-gray-700 ${className}`}></div>
-);

@@ -24,6 +24,7 @@ export default function Navbar({ }: Props) {
   const [_, setLoadingCity] = useAtom(loadingCityAtom);
 
 
+  // api key
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
   const handleInputChang = async (value: string) => {
